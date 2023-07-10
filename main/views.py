@@ -8,19 +8,23 @@ class FieldViewSet(viewsets.ModelViewSet):
     queryset = Field.objects.all()
     serializer_class = FieldSerializer
 
+
+class FieldTypeViewSet(viewsets.ModelViewSet):
+    queryset = FieldType.objects.all()
+    serializer_class = FieldTypeSerializer
+
+
+class RequestViewSet(viewsets.ModelViewSet):
+    queryset = Request.objects.all()
+    serializer_class = RequestSerializer
+
+
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = DefUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 #     permission_classes = [permissions.IsAuthenticated]
 
-
 class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 #     permission_classes = [permissions.IsAuthenticated]

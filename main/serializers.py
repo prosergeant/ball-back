@@ -21,10 +21,22 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
         return TagSerializer(selected_tags, many=True).data
 
 
+class FieldTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FieldType
+        fields = '__all__'
+
+
+class RequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Request
+        fields = '__all__'
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
+        model = DefUser
+        fields = '__all__' #['url', 'username', 'email', 'groups']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
