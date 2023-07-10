@@ -7,7 +7,7 @@ router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'fields', FieldViewSet)
 router.register(r'fieldstypes', FieldTypeViewSet, 'fieldstypes-detail')
-router.register(r'requests', RequestViewSet)
+router.register(r'requests', RequestViewSet, 'request-detail')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
