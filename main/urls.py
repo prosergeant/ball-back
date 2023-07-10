@@ -6,7 +6,7 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'fields', FieldViewSet)
-router.register(r'fieldstypes', FieldTypeViewSet)
+router.register(r'fieldstypes', FieldTypeViewSet, 'fieldstypes-detail')
 router.register(r'requests', RequestViewSet)
 
 # Wire up our API using automatic URL routing.

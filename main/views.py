@@ -10,8 +10,15 @@ class FieldViewSet(viewsets.ModelViewSet):
 
 
 class FieldTypeViewSet(viewsets.ModelViewSet):
-    queryset = FieldType.objects.all()
+#     queryset = FieldType.objects.all()
     serializer_class = FieldTypeSerializer
+
+    def get_queryset(self):
+        queryset = FieldType.objects.all()
+        field = self.request.query_params.get('field')
+        if field is not None:
+            queryset = queryset.filter(field_id=field)
+        return queryset
 
 
 class RequestViewSet(viewsets.ModelViewSet):
