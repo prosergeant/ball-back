@@ -36,7 +36,17 @@ class RequestSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DefUser
-        fields = '__all__' #['url', 'username', 'email', 'groups']
+        fields = [field.name for field in model._meta.fields]
+        fields.append('id')
+
+    def create(self, validated_data):
+        user = DefUser.objects.create(
+            phone = validated_data['phone'],
+            name = validated_data['name']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

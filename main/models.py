@@ -5,7 +5,8 @@ from .managers import CustomUserManager
 class DefUser(AbstractUser):
     is_owner = models.BooleanField(default=False)
 
-    username = None
+    username   = None
+    name       = models.CharField(max_length=255, blank=True, null=True)
     phone      = models.CharField("Номер телефона", max_length=30, unique=True)
 
     #for simple users
@@ -50,6 +51,7 @@ class FieldType(models.Model):
     field = models.ForeignKey("Field", on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     hours = models.IntegerField(verbose_name=("Сколько часов можно играть"), default=1)
+    coast = models.IntegerField()
 
     def __str__(self):
         return self.field.name + ' | ' + self.title
@@ -62,6 +64,9 @@ class Request(models.Model):
     time = models.CharField(max_length=10)
     duration = models.IntegerField(default=1)
     paid = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ['date', 'time']
 
 
 class Tag(models.Model):

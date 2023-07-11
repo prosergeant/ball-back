@@ -4,6 +4,8 @@ from rest_framework import permissions
 from .serializers import *
 from .models import *
 from rest_framework.response import Response
+from rest_framework.views import APIView
+import requests
 
 class FieldViewSet(viewsets.ModelViewSet):
     queryset = Field.objects.all()
@@ -36,38 +38,18 @@ class RequestViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(date=date)
         return queryset
 
-    def create(self, request, *args, **kwargs):
-        req_keys = ['date', 'time', 'field_type', 'user']
-        data = request.data
 
-        if len(data) != 4:
-            return Response({"error": "too many arguments"}, status=422)
+class SendOTPApiView(APIView):
+    def post(self, request):
+        otp = request.data.get('otp')
+        phone_number = request.data.get('phone')
 
-        for i in data:
-            if (i in req_keys) == False:
-                return Response({"error": "not req_keys"}, status=422)
-
-        date = data.get('date')
-        time = data.get('time')
-        field_type_id = data.get('field_type')
-        user_id = data.get('user')
-
-        if date is None:
-            return Response({"error": "date field is Node"}, status=422)
-        if time is None:
-            return Response({"error": "time field is Node"}, status=422)
-
-        same_date = Request.objects.filter(date=date, time=time)
-        if len(same_date) > 0:
-            return Response({"error": "this time already exists"}, status=422)
-
-        new_request = Request(
-            date=date,
-            time=time,
-            user_id=user_id,
-            field_type_id=field_type_id
-        )
-        new_request.save()
+        response = requests.post('https://smsc.kz/rest/send/', json = {
+            "login": "sberendeyev",
+            "psw": "Killer1996",
+            "phones": phone_number,
+            "mes": f"bronkz: {otp}"
+        })
 
         return Response(status=200)
 
@@ -75,6 +57,7 @@ class RequestViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = DefUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+#     http_method_names = ['post']
 #     permission_classes = [permissions.IsAuthenticated]
 
 class GroupViewSet(viewsets.ModelViewSet):
