@@ -32,10 +32,13 @@ class RequestViewSet(viewsets.ModelViewSet):
         queryset = Request.objects.all()
         field_type = self.request.query_params.get('fieldtype')
         date = self.request.query_params.get('date')
+        user_id = self.request.query_params.get('user')
         if field_type is not None:
             queryset = queryset.filter(field_type_id=field_type)
         if date is not None:
             queryset = queryset.filter(date=date)
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
         return queryset
 
 
@@ -59,6 +62,15 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     http_method_names = ['post']
 #     permission_classes = [permissions.IsAuthenticated]
+
+class GetUserInfo(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        user = DefUser.objects.get(id=request.user.id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
