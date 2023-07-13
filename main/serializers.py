@@ -25,12 +25,15 @@ class FieldTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = FieldType
         fields = '__all__'
+        depth=1
 
 
 class RequestSerializer(serializers.ModelSerializer):
+    field_type = FieldTypeSerializer()
     class Meta:
         model = Request
         fields = '__all__'
+#         depth=1
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

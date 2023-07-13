@@ -57,10 +57,10 @@ class SendOTPApiView(APIView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = DefUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-#     http_method_names = ['post']
+    http_method_names = ['post']
 #     permission_classes = [permissions.IsAuthenticated]
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-#     permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
