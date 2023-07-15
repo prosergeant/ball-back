@@ -28,12 +28,20 @@ class FieldTypeSerializer(serializers.ModelSerializer):
         depth=1
 
 
-class RequestSerializer(serializers.ModelSerializer):
-    field_type = FieldTypeSerializer()
+class RequestSerializerPost(serializers.ModelSerializer):
+    is_ended = serializers.ReadOnlyField()
+
     class Meta:
         model = Request
         fields = '__all__'
-#         depth=1
+
+class RequestSerializerGet(serializers.ModelSerializer):
+    field_type = FieldTypeSerializer()
+    is_ended   = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Request
+        fields = '__all__'
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

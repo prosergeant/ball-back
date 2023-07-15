@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
@@ -64,6 +65,18 @@ class Request(models.Model):
     time = models.CharField(max_length=10)
     duration = models.IntegerField(default=1)
     paid = models.BooleanField(default=False)
+
+    @property
+    def is_ended(self):
+        current_date = datetime.datetime.now().date()
+        day = current_date.day
+        month = current_date.month
+
+        req_date = list(map(lambda x: int(x), self.date.split('.')) )
+        req_day = req_date[0]
+        req_month = req_date[1]
+
+        return day > req_day and month >= req_month
 
     class Meta:
         unique_together = ['date', 'time']

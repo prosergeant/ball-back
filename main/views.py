@@ -26,10 +26,14 @@ class FieldTypeViewSet(viewsets.ModelViewSet):
 
 class RequestViewSet(viewsets.ModelViewSet):
 #     queryset = Request.objects.all()
-    serializer_class = RequestSerializer
+#     serializer_class = RequestSerializer
+    def get_serializer_class(self):
+         if self.request.method in ['GET']:
+             return RequestSerializerGet
+         return RequestSerializerPost
 
     def get_queryset(self):
-        queryset = Request.objects.all()
+        queryset = Request.objects.all().order_by('-id')
         field_type = self.request.query_params.get('fieldtype')
         date = self.request.query_params.get('date')
         user_id = self.request.query_params.get('user')
