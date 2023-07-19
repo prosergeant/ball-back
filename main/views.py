@@ -76,6 +76,15 @@ class GetUserInfo(APIView):
         return Response(serializer.data)
 
 
+class FindUserByPhone(APIView):
+    def post(self, request, format=None):
+        user = DefUser.objects.filter(phone=request.data.get('phone'))
+
+        if len(user) > 0:
+            return Response(status=400)
+        return Response(status=200)
+
+
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer

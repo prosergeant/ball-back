@@ -19,4 +19,5 @@ urlpatterns = [
     path('api-token/', TokenObtainPairView.as_view()),
     path('api-token-refresh/', TokenRefreshView.as_view()),
     path('user-info/', GetUserInfo.as_view()),
+    path('find-user/', FindUserByPhone.as_view()),
 ]
