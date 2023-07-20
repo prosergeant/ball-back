@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-t7ij3!ly0lukfz%5^&_p4n#e_(8btjnk30m0qi^k6!&dc@1ef-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.113', '192.168.1.11', '192.168.50.104', '192.168.100.52']
+ALLOWED_HOSTS = ['95.164.19.83', '127.0.0.1', '192.168.1.113', '192.168.1.11', '192.168.50.104', '192.168.100.52']
 
 AUTH_USER_MODEL = 'main.DefUser'
 
@@ -141,7 +141,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.1.11:3000",
     "http://192.168.50.104:3000",
     "http://192.168.50.104:3001",
-    "http://192.168.100.52:3000"
+    "http://192.168.100.52:3000",
+    "http://95.164.19.83",
 ]
 
 REST_FRAMEWORK = {
