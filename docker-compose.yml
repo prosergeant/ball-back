@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  backend:
+    build:
+      context: .
+    image: back_dev
+    container_name: back_dev
+    ports:
+      - "8000:8000"
+    restart: "unless-stopped"
