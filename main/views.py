@@ -62,7 +62,7 @@ class SendOTPApiView(APIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = DefUser.objects.all().order_by('-date_joined')
+    queryset = DefUser.objects.all() #.order_by('-date_joined')
     serializer_class = UserSerializer
     http_method_names = ['post']
 #     permission_classes = [permissions.IsAuthenticated]
@@ -72,6 +72,17 @@ class GetUserInfo(APIView):
 
     def get(self, request, format=None):
         user = DefUser.objects.get(id=request.user.id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+
+class ChangeUserPassword(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, format=None):
+        user = DefUser.objects.get(id=request.user.id)
+        user.set_password(request.data.get('password'))
+        user.save()
         serializer = UserSerializer(user)
         return Response(serializer.data)
 

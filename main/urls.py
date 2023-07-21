@@ -20,4 +20,5 @@ urlpatterns = [
     path('api-token-refresh/', TokenRefreshView.as_view()),
     path('user-info/', GetUserInfo.as_view()),
     path('find-user/', FindUserByPhone.as_view()),
+    path('change-password/', ChangeUserPassword.as_view()),
 ]
