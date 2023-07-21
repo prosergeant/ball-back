@@ -77,10 +77,15 @@ class GetUserInfo(APIView):
 
 
 class ChangeUserPassword(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+#     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, format=None):
-        user = DefUser.objects.get(id=request.user.id)
+        phone = request.data.get('phone')
+        if phone is None:
+            return Response(status=400)
+        user = DefUser.objects.filter(phone=phone).first() #(id=request.user.id)
+        if user is None:
+            return Response(status=400)
         user.set_password(request.data.get('password'))
         user.save()
         serializer = UserSerializer(user)
