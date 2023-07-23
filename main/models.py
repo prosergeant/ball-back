@@ -68,15 +68,23 @@ class Request(models.Model):
 
     @property
     def is_ended(self):
-        current_date = datetime.datetime.now().date()
+        current_datetime = datetime.datetime.now()
+        current_date = current_datetime.date()
+        current_time = current_datetime.time()
         day = current_date.day
         month = current_date.month
+        hour = current_time.hour
+        minute = current_time.minute
 
         req_date = list(map(lambda x: int(x), self.date.split('.')) )
         req_day = req_date[0]
         req_month = req_date[1]
 
-        return day > req_day and month >= req_month
+        req_time = list(map(lambda x: int(x), self.time.split(':')) )
+        req_hour = req_time[0]
+        req_minute = req_time[1]
+
+        return day > req_day and month >= req_month and hour > req_hour and minute > req_minute
 
     class Meta:
         unique_together = ['date', 'time']
