@@ -2,7 +2,11 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
+
+RUN apk update \
+    && apk add postgresql-dev gcc python3-dev musl-dev
 
 COPY ./req.txt /app/requirements.txt
 
