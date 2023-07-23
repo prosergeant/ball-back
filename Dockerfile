@@ -5,9 +5,6 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
-RUN apt update \
-    && apt install postgresql-dev gcc python3-dev musl-dev
-
 COPY ./req.txt /app/requirements.txt
 
 #RUN #apt-get update && apt-get install -y postgis
