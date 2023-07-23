@@ -10,14 +10,15 @@ services:
       - "8000:8000"
     restart: "unless-stopped"
 
-  db:
-    image: postgres:12.0-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
+  pgdb:
+    image: postgres
     environment:
-      - POSTGRES_USER=bronkz
-      - POSTGRES_PASSWORD=test
-      - POSTGRES_DB=bronkzdb
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: pgdb
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
 
 volumes:
-  postgres_data:
+  pgdbdata: null

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-t7ij3!ly0lukfz%5^&_p4n#e_(8btjnk30m0qi^k6!&dc@1ef-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['95.164.19.83', '127.0.0.1', '192.168.1.113', '192.168.1.11', '192.168.50.104', '192.168.100.52']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '95.164.19.83', '192.168.1.113', '192.168.1.11', '192.168.50.104', '192.168.100.52']
 
 AUTH_USER_MODEL = 'main.DefUser'
 
@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'main',
     'rest_framework',
     'corsheaders',
-    'rest_framework_simplejwt.token_blacklist'
+    'rest_framework_simplejwt.token_blacklist',
+
+    'django.contrib.postgres'
 ]
 
 MIDDLEWARE = [
@@ -85,11 +87,11 @@ WSGI_APPLICATION = 'ballback.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bronkzdb',
-        "USER": 'bronkz',
-        "PASSWORD": 'test',
-        "HOST": 'localhost',
-        "PORT": '5432'
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'pgdb',
+        'PORT': '5432',
     }
 }
 
