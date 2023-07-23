@@ -84,12 +84,7 @@ class Request(models.Model):
         req_hour = req_time[0]
         req_minute = req_time[1]
 
-        print(hour)
-        print(req_hour)
-        print(minute)
-        print(req_minute)
-
-        return day > req_day and month >= req_month and hour > req_hour
+        return day >= req_day and month >= req_month and hour > req_hour
 
     class Meta:
         unique_together = ['date', 'time']
