@@ -9,6 +9,8 @@ class DefUser(AbstractUser):
     username   = None
     name       = models.CharField(max_length=255, blank=True, null=True)
     phone      = models.CharField("Номер телефона", max_length=30, unique=True)
+    photo      = models.ImageField(upload_to='user_photo', blank=True)
+
 
     #for simple users
     cashback   = models.IntegerField(verbose_name=("Cashback"), default=0)
