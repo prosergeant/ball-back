@@ -106,9 +106,7 @@ class SetNewImage(APIView):
         image = request.FILES.get('image')
         user = DefUser.objects.filter(id=request.user.id).first()
         if user is None:
-            return Response(status=400, {
-                "error": "user not found"
-            })
+            return Response({"error": "user not found"}, status=400)
         user.photo = image
         user.save()
         return Response(status=200)
