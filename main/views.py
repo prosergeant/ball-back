@@ -104,7 +104,11 @@ class FindUserByPhone(APIView):
 class SetNewImage(APIView):
     def post(self, request, *args, **kwargs):
         image = request.FILES.get('image')
-        user = request.user.id
+        user = DefUser.objects.filter(id=request.user.id).first()
+        if user is None:
+            return Response(status=400, {
+                "error": "user not found"
+            })
         user.photo = image
         user.save()
         return Response(status=200)
