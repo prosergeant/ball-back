@@ -6,7 +6,7 @@ services:
       context: .
     image: back_dev
     volumes:
-      - ./media:/home/web/media:rw
+      - ./media:/app/media:rw
     container_name: back_dev
     ports:
       - "8000:8000"
