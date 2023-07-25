@@ -101,6 +101,14 @@ class FindUserByPhone(APIView):
         return Response(status=200)
 
 
+class SetNewImage(APIView):
+    def post(self, request, *args, **kwargs):
+        image = request.FILES.get('image')
+        user = request.user.id
+        user.photo = image
+        user.save()
+        return Response(status=200)
+
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
