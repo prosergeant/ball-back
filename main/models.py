@@ -80,7 +80,7 @@ class Request(models.Model):
         req_hour = req_time[0]
         req_minute = req_time[1]
 
-        req_datetime_str = f'{current_datetime.year} {req_month} {req_day} {req_hour} 00'
+        req_datetime_str = f'{current_datetime.year} {req_day} {req_month} {req_hour} 00'
         req_datetime = datetime.datetime.strptime(req_datetime_str, '%Y %d %m %H %M')
 
         return current_datetime > req_datetime
