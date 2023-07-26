@@ -71,12 +71,6 @@ class Request(models.Model):
     @property
     def is_ended(self):
         current_datetime = datetime.datetime.now()
-        current_date = current_datetime.date()
-        current_time = current_datetime.time()
-        day = current_date.day
-        month = current_date.month
-        hour = current_time.hour
-        minute = current_time.minute
 
         req_date = list(map(lambda x: int(x), self.date.split('.')) )
         req_day = req_date[0]
@@ -86,7 +80,10 @@ class Request(models.Model):
         req_hour = req_time[0]
         req_minute = req_time[1]
 
-        return day >= req_day and month >= req_month and hour > req_hour
+        req_datetime_str = f'{current_datetime.year} {req_month} {req_day} {req_hour} 00'
+        req_datetime = datetime.datetime.strptime(req_datetime_str, '%Y %d %m %H %M')
+
+        return current_datetime > req_datetime
 
     class Meta:
         unique_together = ['date', 'time']
