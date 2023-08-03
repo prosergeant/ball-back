@@ -17,12 +17,10 @@ services:
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=zYv280IeT45^
+      - POSTGRES_PASSWORD=postgres
     container_name: pgdb
     volumes:
       - pgdbdata:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
 
 volumes:
   pgdbdata: null
