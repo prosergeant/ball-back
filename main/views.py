@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 import requests
 
 class FieldViewSet(viewsets.ModelViewSet):
-    queryset = Field.objects.all()
+    queryset = Field.objects.all().order_by('-id')
     serializer_class = FieldSerializer
 
 

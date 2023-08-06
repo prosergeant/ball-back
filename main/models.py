@@ -55,6 +55,8 @@ class FieldType(models.Model):
     title = models.CharField(max_length=100)
     hours = models.IntegerField(verbose_name=("Сколько часов можно играть"), default=1)
     coast = models.IntegerField()
+    lat = models.FloatField(null=True, blank=True)
+    lng = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.field.name + ' | ' + self.title
