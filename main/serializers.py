@@ -35,6 +35,17 @@ class RequestSerializerPost(serializers.ModelSerializer):
         model = Request
         fields = '__all__'
 
+    def validate(self, data):
+        queryset = Request.objects.filter(
+           date=data.get('date', 'null'),
+           time=data.get('time', 'null'),
+           paid=True
+        )
+        if queryset.exists():
+            raise serializers.ValidationError("поля date, time должны быть уникальными")
+        return data
+
+
 class RequestSerializerGet(serializers.ModelSerializer):
     field_type = FieldTypeSerializer()
     is_ended   = serializers.ReadOnlyField()

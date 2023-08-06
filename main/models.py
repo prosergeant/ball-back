@@ -87,9 +87,6 @@ class Request(models.Model):
 
         return current_datetime > req_datetime
 
-    class Meta:
-        unique_together = ['date', 'time']
-
 
 class Tag(models.Model):
     field = models.ForeignKey("Field", on_delete=models.CASCADE) #,verbose_name=("")
