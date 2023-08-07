@@ -37,9 +37,10 @@ class RequestSerializerPost(serializers.ModelSerializer):
 
     def validate(self, data):
         queryset = Request.objects.filter(
-           date=data.get('date', 'null'),
-           time=data.get('time', 'null'),
-           paid=True
+            field_type=data.get('field_type', 'null'),
+            date=data.get('date', 'null'),
+            time=data.get('time', 'null'),
+            paid=True
         )
         if queryset.exists():
             raise serializers.ValidationError("поля date, time должны быть уникальными")
