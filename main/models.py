@@ -69,6 +69,7 @@ class Request(models.Model):
     time = models.CharField(max_length=10)
     duration = models.IntegerField(default=1)
     paid = models.BooleanField(default=False)
+    book = models.BooleanField(default=False)
 
     @property
     def is_ended(self):

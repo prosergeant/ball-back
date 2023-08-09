@@ -30,6 +30,8 @@ class RequestViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
          if self.request.method in ['GET']:
              return RequestSerializerGet
+         elif self.request.method in ['PATCH']:
+             return RequestSerializerPatch
          return RequestSerializerPost
 
     def get_queryset(self):

@@ -47,6 +47,14 @@ class RequestSerializerPost(serializers.ModelSerializer):
         return data
 
 
+class RequestSerializerPatch(serializers.ModelSerializer):
+    is_ended = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Request
+        fields = '__all__'
+
+
 class RequestSerializerGet(serializers.ModelSerializer):
     field_type = FieldTypeSerializer()
     is_ended   = serializers.ReadOnlyField()
