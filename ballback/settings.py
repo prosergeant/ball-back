@@ -126,7 +126,7 @@ USE_TZ = True
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL  = 'static/'
 
-MEDIA_URL   = 'https://bronkz.app/media/'
+MEDIA_URL   = 'https://bronkz.app/api/media/'
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
