@@ -25,9 +25,6 @@ class DefUser(AbstractUser):
     def __str__(self):
         return self.phone
 
-    def custom_image_url(self):
-        return f'/https://bronkz.app/media/user_photo/{self.image.name}'
-
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
@@ -47,9 +44,6 @@ class Field(models.Model):
 
     def __str__(self):
         return self.name
-
-    def custom_image_url(self):
-        return f'/https://bronkz.app/media/field_photo/{self.image.name}'
 
     class Meta:
         verbose_name = 'Поле'

@@ -9,6 +9,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 class FieldSerializer(serializers.HyperlinkedModelSerializer):
     tags = serializers.SerializerMethodField()
+#     photo = serializers.SerializerMethodField()
 
     class Meta:
         model = Field
@@ -19,6 +20,9 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
     def get_tags(self, obj):
         selected_tags = Tag.objects.filter(field_id=obj.id).distinct()
         return TagSerializer(selected_tags, many=True).data
+
+    def get_photo(self, obj):
+        return f'/https://bronkz.app/media/field_photo/{self.image.name}'
 
 
 class FieldTypeSerializer(serializers.ModelSerializer):
