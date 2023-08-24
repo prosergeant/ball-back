@@ -140,6 +140,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.50.104:3001",
     "http://192.168.100.52:3000",
     "http://95.164.19.83",
+    "https://bronkz.app"
 ]
 
 REST_FRAMEWORK = {
