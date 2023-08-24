@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-t7ij3!ly0lukfz%5^&_p4n#e_(8btjnk30m0qi^k6!&dc@1ef-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '95.164.19.83', '192.168.1.113', '192.168.1.11', '192.168.50.104', '192.168.100.52']
+ALLOWED_HOSTS = ['bronkz.app', 'localhost', '127.0.0.1', '0.0.0.0', '95.164.19.83', '192.168.1.113', '192.168.1.11', '192.168.50.104', '192.168.100.52']
 
 AUTH_USER_MODEL = 'main.DefUser'
 
