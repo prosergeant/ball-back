@@ -11,6 +11,13 @@ class FieldViewSet(viewsets.ModelViewSet):
     queryset = Field.objects.all().order_by('id')
     serializer_class = FieldSerializer
 
+    def get_queryset(self):
+        queryset = Field.objects.all()
+        field = self.request.query_params.get('field')
+        if field is not None:
+            queryset = queryset.filter(field_id=field)
+        return queryset
+
 
 class FieldTypeViewSet(viewsets.ModelViewSet):
 #     queryset = FieldType.objects.all()
