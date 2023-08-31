@@ -9,6 +9,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 class FieldSerializer(serializers.HyperlinkedModelSerializer):
     tags = serializers.SerializerMethodField()
+    field_types = serializers.SerializerMethodField()
 
     class Meta:
         model = Field
@@ -19,6 +20,10 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
     def get_tags(self, obj):
         selected_tags = Tag.objects.filter(field_id=obj.id).distinct()
         return TagSerializer(selected_tags, many=True).data
+
+    def get_field_types(self, obj):
+        selected_field_types = FieldType.objects.filter(field_id=obj.id).distinct()
+        return FieldTypeSerializer(selected_tags, many=True).data
 
 class FieldTypeSerializer(serializers.ModelSerializer):
     class Meta:
