@@ -24,7 +24,7 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_field_types(self, obj):
         selected_field_types = FieldType.objects.filter(field_id=obj.id).distinct()
-        return FieldTypeSerializer(selected_tags, many=True).data
+        return FieldTypeSerializer(selected_field_types, many=True).data
 
 class FieldTypeSerializer(serializers.ModelSerializer):
     class Meta:
