@@ -15,7 +15,7 @@ class FieldViewSet(viewsets.ModelViewSet):
         queryset = Field.objects.all()
         field = self.request.query_params.get('field')
         if field is not None:
-            queryset = queryset.filter(field_id=field)
+            queryset = queryset.filter(id=field)
         return queryset
 
 
