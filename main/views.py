@@ -110,6 +110,15 @@ class FindUserByPhone(APIView):
         return Response(status=200)
 
 
+class FindUserById(APIView):
+    def get(self, request, format=None):
+        user = DefUser.objects.filter(id=request.query_params.get('id')).first()
+
+        if user is None:
+            return Response(status=400)
+        return Response(status=200)
+
+
 class SetNewImage(APIView):
     def post(self, request, *args, **kwargs):
         image = request.FILES.get('image')
