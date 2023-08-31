@@ -16,6 +16,7 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
         fields = [field.name for field in model._meta.fields]
         fields.append('id')
         fields.append('tags')
+        fields.append('field_types')
 
     def get_tags(self, obj):
         selected_tags = Tag.objects.filter(field_id=obj.id).distinct()
