@@ -116,7 +116,9 @@ class FindUserById(APIView):
 
         if user is None:
             return Response(status=400)
-        return Response(status=200)
+
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 
 class SetNewImage(APIView):
