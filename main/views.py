@@ -101,6 +101,20 @@ class ChangeUserPassword(APIView):
         return Response(serializer.data)
 
 
+class ChangeUserFcmToken(APIView):
+    def post(self, request, format=None):
+        phone = request.data.get('phone')
+        token = request.data.get('fcmToken')
+        if phone is None or token is None:
+            return Response(status=400)
+        user = DefUser.objects.filter(phone=phone).first() #(id=request.user.id)
+        if user is None:
+            return Response(status=400)
+        user.fcmToken = token
+        user.save()
+        return Response(status=200)
+
+
 class FindUserByPhone(APIView):
     def post(self, request, format=None):
         user = DefUser.objects.filter(phone=request.data.get('phone'))

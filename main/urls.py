@@ -22,5 +22,6 @@ urlpatterns = [
     path('find-user/', FindUserByPhone.as_view()),
     path('find-user-by-id/', FindUserById.as_view()),
     path('change-password/', ChangeUserPassword.as_view()),
+    path('change-fcm-token/', ChangeUserFcmToken.as_view()),
     path('set-new-image/', SetNewImage.as_view()),
 ]
