@@ -115,6 +115,44 @@ class ChangeUserFcmToken(APIView):
         return Response(status=200)
 
 
+class SendNotifyToUser(APIView):
+    def post(self, request, format=None):
+        phone = request.data.get('phone')
+        title = request.data.get('title')
+        body = request.data.get('body')
+        sound = request.data.get('sound')
+        badge = request.data.get('badge')
+
+        if phone is None or title is None or body is None:
+            return Response(status=400)
+
+        if sound is None:
+            sound = 'default'
+        if badge is None:
+            badge = 1
+
+        user = DefUser.objects.filter(phone=phone).first() #(id=request.user.id)
+        if user is None:
+            return Response(status=400)
+
+        url = 'https://fcm.googleapis.com/fcm/send'
+        headers = {'Authorization': 'key=AAAAUdFgUgs:APA91bH1eR_Gk-5SNFMNnHag-ODuPYBUEXvnfDrJgqUhjmZAnc6W5dNKQr_nT3KBe11qEj60nfGwMNjPp-zlG1ExKCsMeQR-HaDFumRNkBwIedrBhHBhVz99aN_HRvnxfCbEcntrkui4'}
+        res = requests.post(url, headers=headers, json = {
+            "to": user.fcmToken,
+            "notification": {
+                "title": title,
+                "body": body,
+                "sound": sound,
+                "badge": badge
+            }
+         })
+
+        print(res.status_code)
+        print(res.text)
+
+        return Response(status=200)
+
+
 class FindUserByPhone(APIView):
     def post(self, request, format=None):
         user = DefUser.objects.filter(phone=request.data.get('phone'))
