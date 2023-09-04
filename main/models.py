@@ -31,6 +31,7 @@ class DefUser(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
 class Field(models.Model):
+    owner      = models.ForeignKey("DefUser", on_delete=models.DO_NOTHING, blank=True, null=True)
     photo      = models.ImageField(upload_to='field_photo', blank=True)
     name       = models.CharField(max_length=100)
     address    = models.CharField(max_length=100)
