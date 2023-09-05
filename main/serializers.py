@@ -10,6 +10,7 @@ class TagSerializer(serializers.ModelSerializer):
 class FieldSerializer(serializers.HyperlinkedModelSerializer):
     tags = serializers.SerializerMethodField()
     field_types = serializers.SerializerMethodField()
+    owner_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Field
@@ -17,6 +18,8 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
         fields.append('id')
         fields.append('tags')
         fields.append('field_types')
+#         fields.pop('owner')
+        fields.append('owner_id')
 
     def get_tags(self, obj):
         selected_tags = Tag.objects.filter(field_id=obj.id).distinct()
@@ -25,6 +28,12 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
     def get_field_types(self, obj):
         selected_field_types = FieldType.objects.filter(field_id=obj.id).distinct()
         return FieldTypeSerializer(selected_field_types, many=True).data
+
+    def get_owner_id(self, obj):
+        owner = DefUser.objects.filter(id=obj.owner.id).first()
+        if owner is None:
+            return ""
+        return owner.id
 
 class FieldTypeSerializer(serializers.ModelSerializer):
     class Meta:
