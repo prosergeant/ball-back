@@ -18,7 +18,7 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
         fields.append('id')
         fields.append('tags')
         fields.append('field_types')
-#         fields.pop('owner')
+        fields.pop('owner')
         fields.append('owner_id')
 
     def get_tags(self, obj):
