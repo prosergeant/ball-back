@@ -14,8 +14,12 @@ class FieldViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Field.objects.all()
         field = self.request.query_params.get('field')
+        user_id = self.request.query_params.get('user_id')
+        user = DefUser.objects.filter(id=user_id).first()
         if field is not None:
             queryset = queryset.filter(id=field)
+        if user is not None:
+            queryset = queryset.filter(owner_id=user.id)
         return queryset
 
 
