@@ -30,9 +30,9 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
         return FieldTypeSerializer(selected_field_types, many=True).data
 
     def get_owner_id(self, obj):
-        owner = DefUser.objects.filter(id=obj.owner.id).first()
-        if owner is None:
+        if obj.owner is None:
             return ""
+        owner = DefUser.objects.filter(id=obj.owner.id).first()
         return owner.id
 
 class FieldTypeSerializer(serializers.ModelSerializer):
