@@ -72,6 +72,7 @@ class Request(models.Model):
     duration = models.IntegerField(default=1)
     paid = models.BooleanField(default=False)
     book = models.BooleanField(default=False)
+    cancel_time = models.DateTimeField(blank=True, null=True)
 
     @property
     def is_ended(self):
