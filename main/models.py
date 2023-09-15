@@ -52,6 +52,11 @@ class Field(models.Model):
         verbose_name_plural = 'Поля'
 
 
+class FieldPhoto(models.Model):
+    field = models.ForeignKey("Field", on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='field_photo')
+
+
 class FieldType(models.Model):
     field = models.ForeignKey("Field", on_delete=models.CASCADE)
     title = models.CharField(max_length=100)

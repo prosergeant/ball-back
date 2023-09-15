@@ -7,6 +7,13 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ('id', 'icon', 'name') #'__all__'
 
+
+class FieldPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FieldPhoto
+        fields = '__all__'
+
+
 class FieldSerializer(serializers.HyperlinkedModelSerializer):
     tags = serializers.SerializerMethodField()
     field_types = serializers.SerializerMethodField()
