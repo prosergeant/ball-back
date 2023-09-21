@@ -100,6 +100,17 @@ class GetUserInfo(APIView):
         return Response(serializer.data)
 
 
+class DeleteUser(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        user = DefUser.objects.filter(id=request.user.id).first()
+        if user is None:
+            return Response(status=404)
+        user.delete()
+        return Response(status=200)
+
+
 class ChangeUserPassword(APIView):
 #     permission_classes = [permissions.IsAuthenticated]
 
